@@ -1,0 +1,9 @@
+question,ground_truth,retrieved_context,rag_answer
+What is the capital of Australia?,Canberra,"Australia's capital is Canberra. Sydney is the largest city, but Canberra is the capital.",The capital of Australia is Canberra.
+Who wrote Pride and Prejudice?,Jane Austen,Pride and Prejudice was written by Jane Austen.,Pride and Prejudice was written by Jane Austen.
+What is the chemical symbol for gold?,Au,The chemical symbol for gold is Au.,The chemical symbol for gold is Au.
+Which planet is known as the Red Planet?,Mars,Mars is known as the Red Planet.,Mars is known as the Red Planet.
+Who developed the theory of relativity?,Albert Einstein,Albert Einstein developed the theory of relativity.,Albert Einstein developed the theory of relativity.
+What is the population of Wakanda?,Fictional place,"Australia's capital is Canberra. Sydney is the largest city, but Canberra is the capital.",Not found in provided context.
+Who is the president of Mars?,No such person,Mars is known as the Red Planet.,Not found in provided context.
+What is the capital of Middle Earth?,Fictional place,"Australia's capital is Canberra. Sydney is the largest city, but Canberra is the capital.",Not found in provided context.
