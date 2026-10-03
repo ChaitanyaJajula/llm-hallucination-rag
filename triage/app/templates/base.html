@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}Triage{% endblock %}</title>
+<style>
+:root{--bg:#f6f7f9;--fg:#1c2330;--mut:#667085;--card:#fff;--line:#e4e7ec;--acc:#3b5bdb;--red:#d92d20;--amb:#b54708;--grn:#067647}
+@media(prefers-color-scheme:dark){:root{--bg:#12151c;--fg:#e6e9f0;--mut:#98a2b3;--card:#1b2030;--line:#2b3245;--acc:#8ea2ff;--red:#ff7b72;--amb:#f0b35a;--grn:#4ad295}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,sans-serif}
+main{max-width:980px;margin:0 auto;padding:16px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+h1{font-size:20px;margin:8px 0}a{color:var(--acc)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin:10px 0}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-size:12px;text-transform:uppercase}
+tr.esc td{background:color-mix(in srgb,var(--red) 10%,transparent)}
+.pill{display:inline-block;padding:1px 8px;border-radius:99px;border:1px solid var(--line);font-size:12px;white-space:nowrap}
+.u1{color:var(--red);border-color:var(--red)}.u2{color:var(--amb);border-color:var(--amb)}.u3{color:var(--grn);border-color:var(--grn)}
+.flag{color:var(--red);font-weight:600}.mut{color:var(--mut);font-size:13px}
+button,select,input,textarea{font:inherit;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+button{cursor:pointer}button.p{background:var(--acc);color:#fff;border-color:var(--acc)}
+textarea{width:100%;min-height:200px}input[type=text],input[type=email]{width:100%}
+form.inline{display:inline}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.banner{padding:8px 12px;border-radius:8px;border:1px solid var(--amb);color:var(--amb);margin:10px 0}
+.empty{text-align:center;padding:40px 10px}
+</style></head><body><main>
+<header><h1><a href="/" style="text-decoration:none;color:inherit">📥 Triage</a></h1>
+<span class="mut">AI sorts · you review · you send</span></header>
+{% block content %}{% endblock %}
+</main></body></html>

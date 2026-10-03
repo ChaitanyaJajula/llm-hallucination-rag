@@ -1,0 +1,11 @@
+subject,body,plan,category,urgency
+Charged twice this month,"I see two charges of $49 on my card. Refund one ASAP.",Pro,billing,1
+API returns 500,"POST /v1/events returns 500 for every request. We're blocked.",Free,bug,1
+SSO setup?,"How do we connect Okta SSO? Is there a guide?",Enterprise,how-to,3
+Cancel my account,"Too slow and support never answers. Cancel effective today.",Pro,cancellation,2
+Feature idea,"Would love a dark mode and a Zapier integration!",Pro,feature request,3
+Data export,"We need a full CSV export of all events for our audit by Friday.",Enterprise,other,2
+Invoice copy,"Can you resend my September invoice for our accountant?",Pro,billing,3
+Dashboard blank,"After the update the dashboard shows an error and no charts load.",Pro,bug,2
+Reset password,"How do I reset my password? I can't find the option.",Free,how-to,3
+Thanks!,"Just wanted to say the new release is great, thank you.",Pro,other,3

@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: triage
+    runtime: docker
+    rootDir: triage
+    plan: starter
+    healthCheckPath: /healthz
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false          # set in the Render dashboard, never in git
+      - key: TRIAGE_DB
+        value: /data/triage.db
+    disk:
+      name: triage-data
+      mountPath: /data
+      sizeGB: 1

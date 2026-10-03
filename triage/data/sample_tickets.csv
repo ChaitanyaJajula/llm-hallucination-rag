@@ -1,0 +1,7 @@
+id,customer_email,plan,subject,body,received_at
+1,maya@acme.io,Pro,Charged twice this month,"I see two charges of $49 on my card for October. Please refund one ASAP.",2026-10-01T09:12:00Z
+2,dev@lumen.app,Free,API returns 500,"Since this morning POST /v1/events returns 500 for every request. We're blocked.",2026-10-01T09:40:00Z
+3,sam@northwind.co,Enterprise,SSO setup?,"How do we connect Okta SSO? Is there a guide?",2026-10-01T10:05:00Z
+4,lee@brightpath.org,Pro,Cancel my account,"This tool is too slow and support never answers. Cancel effective today.",2026-10-01T11:22:00Z
+5,ana@orbit.dev,Pro,Feature idea,"Would love a dark mode and a Zapier integration!",2026-10-01T12:00:00Z
+6,ops@kestrel.ai,Enterprise,Data export,"We need a full CSV export of all events for our audit by Friday.",2026-10-01T13:31:00Z

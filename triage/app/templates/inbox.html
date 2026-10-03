@@ -1,0 +1,40 @@
+{% extends "base.html" %}{% block content %}
+{% if not llm_on %}<div class="banner">No <code>ANTHROPIC_API_KEY</code> set: tickets are triaged by a simple rule-based fallback (labelled “fallback”). Review drafts carefully.</div>{% endif %}
+{% if today_counts %}<div class="mut">Today: {% for c in today_counts %}{{ c.category or 'untriaged' }} {{ c.n }}{% if not loop.last %} · {% endif %}{% endfor %}</div>{% endif %}
+<form class="row card" method="get">
+  <label>Category <select name="category"><option value="">all</option>
+    {% for c in categories %}<option {{ 'selected' if c==category }}>{{ c }}</option>{% endfor %}</select></label>
+  <label>Status <select name="status"><option value="">all</option>
+    {% for s in statuses %}<option {{ 'selected' if s==status }}>{{ s }}</option>{% endfor %}</select></label>
+  <button>Filter</button>{% if category or status %}<a href="/">clear</a>{% endif %}
+  <span style="flex:1"></span><a href="#new">+ New ticket</a>
+</form>
+{% if not tickets %}
+<div class="card empty">
+  {% if total == 0 %}<p><b>The inbox is empty.</b></p>
+  <form method="post" action="/import-sample"><button class="p">Load 6 sample tickets</button></form>
+  {% else %}<p>No tickets match these filters.</p><a href="/">Clear filters</a>{% endif %}
+</div>
+{% else %}
+<div class="card" style="padding:0;overflow-x:auto"><table>
+<tr><th>Urgency</th><th>Ticket</th><th>Category</th><th>Plan</th><th>Status</th><th>AI</th></tr>
+{% for t in tickets %}{% set esc = is_escalated(t) %}
+<tr class="{{ 'esc' if esc }}">
+  <td>{% if t.urgency %}<span class="pill u{{ t.urgency }}">U{{ t.urgency }}</span>{% else %}<span class="pill">—</span>{% endif %}
+      {% if esc %}<div class="flag">⚑ escalate</div>{% endif %}</td>
+  <td><a href="/tickets/{{ t.id }}"><b>{{ t.subject }}</b></a><br>
+      <span class="mut">{{ t.summary or 'not triaged yet' }} · {{ t.customer_email }}</span></td>
+  <td>{{ t.category or '—' }}</td><td>{{ t.plan }}</td>
+  <td><span class="pill">{{ t.status }}</span></td>
+  <td class="mut">{{ t.ai_source }}{% if t.latency_ms is not none %}<br>{{ t.latency_ms }} ms{% endif %}{% if t.cost_usd %} · ${{ '%.5f'|format(t.cost_usd) }}{% endif %}</td>
+</tr>{% endfor %}</table></div>
+{% endif %}
+<form id="new" class="card" method="post" action="/tickets">
+  <b>Add a ticket</b>
+  <div class="row"><input type="email" name="customer_email" placeholder="customer@email.com" required style="flex:2">
+  <select name="plan"><option>Free</option><option>Pro</option><option>Enterprise</option></select></div>
+  <p><input type="text" name="subject" placeholder="Subject" required maxlength="300"></p>
+  <p><textarea name="body" placeholder="Message" required style="min-height:90px"></textarea></p>
+  <button class="p">Add &amp; triage</button>
+</form>
+{% endblock %}

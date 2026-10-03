@@ -1,0 +1,34 @@
+{% extends "base.html" %}{% block title %}{{ t.subject }} · Triage{% endblock %}{% block content %}
+<p><a href="/">← Inbox</a></p>
+<div class="card">
+  <div class="row"><h2 style="margin:0;flex:1">{{ t.subject }}</h2>
+    <span class="pill">{{ t.status }}</span>
+    {% if t.urgency %}<span class="pill u{{ t.urgency }}">Urgency {{ t.urgency }}</span>{% endif %}
+    {% if escalated %}<span class="flag">⚑ Enterprise · urgent</span>{% endif %}</div>
+  <div class="mut">{{ t.customer_email }} · {{ t.plan }} · {{ t.received_at }}</div>
+  <p style="white-space:pre-wrap">{{ t.body }}</p>
+</div>
+<div class="card">
+  <div class="row"><b>AI triage</b>
+    <span class="pill">{{ t.category or 'pending' }}</span><span class="pill">{{ t.sentiment or '—' }}</span>
+    <span class="mut">{{ t.ai_source }}{% if t.latency_ms is not none %} · {{ t.latency_ms }} ms{% endif %}{% if t.cost_usd %} · ${{ '%.5f'|format(t.cost_usd) }}{% endif %}</span></div>
+  <p>{{ t.summary or 'No summary yet.' }}</p>
+  {% if t.ai_source != 'llm' %}<div class="banner">
+    {% if t.ai_source == 'pending' %}Triage hasn’t completed.{% else %}Rule-based fallback was used{% if t.ai_error %}: {{ t.ai_error }}{% endif %}.{% endif %}
+    {% if t.status == 'new' %}<form class="inline" method="post" action="/tickets/{{ t.id }}/retriage"><button>Retry AI</button></form>{% endif %}</div>{% endif %}
+</div>
+<form class="card" method="post" action="/tickets/{{ t.id }}/approve">
+  <b>Draft reply</b>
+  <p><textarea name="draft" {{ 'readonly' if t.status != 'new' }}>{{ t.draft or '' }}</textarea></p>
+  <div class="row">
+  {% if t.status == 'new' %}
+    <button class="p">Approve</button>
+    <button formaction="/tickets/{{ t.id }}/draft">Save edits</button>
+    <button formaction="/tickets/{{ t.id }}/retriage" formnovalidate title="Replaces the draft with a fresh AI draft">Regenerate</button>
+  {% elif t.status == 'approved' %}
+    <button class="p" formaction="/tickets/{{ t.id }}/send">Mark as sent</button>
+    <span class="mut">Approved. Demo only: no real email is sent.</span>
+  {% else %}<span class="mut">Sent ✓</span>{% endif %}
+  </div>
+</form>
+{% endblock %}
